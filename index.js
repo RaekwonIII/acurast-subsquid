@@ -49,7 +49,7 @@ async function getSquidLatestBlock() {
   };
 
   const response = await axios(options);
-  blockNumber = response.data.data.squidStatus.height;
+  const blockNumber = response.data.data.squidStatus.height;
   console.log(`Squid latest block ${blockNumber}`);
   return blockNumber;
 }
