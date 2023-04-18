@@ -23,21 +23,21 @@ const getSquidLatestBlock = () => {
               console.error(errorMessage)
           }
       )
-    })  
+    })
   };
-  
+
   const getLatestBlock = () => {
     return new Promise((resolve, reject) =>{
-  
+
       const RPC = "https://rpc.api.moonbeam.network";
-      
+
       const eth_blockNumberQuery = {
           "method":"eth_blockNumber",
           "params":[],
           "id":1,
           "jsonrpc":"2.0"
       };
-      
+
       httpPOST(
           RPC,
           JSON.stringify(eth_blockNumberQuery),
@@ -52,17 +52,18 @@ const getSquidLatestBlock = () => {
           },
           (errorMessage) => {
               console.error('Failed: ' + errorMessage);
+              reject(errorMessage);
           }
       )
-    })  
+    })
   };
-  
+
   const alertSquidStuck = () => {
-  
+
       return new Promise((resolve, reject) => {
           httpPOST(
               "https://squid-stuck.free.beeceptor.com",
-              {},
+              "", // expects a JSON string as POST body
               {
                   "content-type": "application/json"
               },
@@ -74,11 +75,12 @@ const getSquidLatestBlock = () => {
               },
               (errorMessage) => {
                   console.error('Failed: ' + errorMessage);
+                  reject(errorMessage);
               }
           )
-      })  
+      })
   }
-  
+
   const getMoonwelData = () => {
     return new Promise((resolve, reject) =>{
       httpPOST(
@@ -109,9 +111,9 @@ const getSquidLatestBlock = () => {
               console.error(errorMessage)
           }
       )
-    })  
+    })
   };
-  
+
   const postReservesData = (moonwellSquidData) => {
       const oracleAddress = "<0x evm_contract_address>";
       const reserves = moonwellSquidData.reserves.toString(16)
@@ -137,7 +139,7 @@ const getSquidLatestBlock = () => {
           },
       );
   }
-  
+
   const postPriceData = (moonwellSquidData) => {
       const oracleAddress = "<0x evm_contract_address>";
       const price = moonwellSquidData.underlyingPriceUSD * 1000000000000000000
@@ -163,8 +165,8 @@ const getSquidLatestBlock = () => {
           },
       );
   }
-  
-  void async function() { 
+
+  void async function() {
       const latestBlock = await getLatestBlock();
       const squidLatestBlock = await getSquidLatestBlock();
       if (latestBlock > (squidLatestBlock + 5)) {
@@ -177,4 +179,3 @@ const getSquidLatestBlock = () => {
       const squidData = await getMoonwelData();
       // await postToAstarOracle(squidData);
   }();
-  
