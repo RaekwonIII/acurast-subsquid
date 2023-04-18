@@ -52,6 +52,7 @@ const getSquidLatestBlock = () => {
           },
           (errorMessage) => {
               console.error('Failed: ' + errorMessage);
+              reject(errorMessage);
           }
       )
     })
@@ -74,6 +75,7 @@ const getSquidLatestBlock = () => {
               },
               (errorMessage) => {
                   console.error('Failed: ' + errorMessage);
+                  reject(errorMessage);
               }
           )
       })
