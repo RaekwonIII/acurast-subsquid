@@ -1,10 +1,11 @@
 import { ethers } from "hardhat";
 
 async function main() {
-  const processorAddress =  "0xPROCESSOR_ADDRESS";
+  const processorAddress =  "Y32hsa4AbRMMEZ99skj5MTMvXE7mnZLqKPZF1un1VLoBLsn";
 
-  const Oracle = await ethers.getContractFactory("Oracle");
-  const oracle = await Oracle.deploy(processorAddress);
+  const Oracle = await ethers.getContractFactory("MoonwellInfoOracle");
+  const oracle = await Oracle.deploy();
+  // const oracle = await Oracle.deploy(processorAddress);
 
   await oracle.deployed();
 

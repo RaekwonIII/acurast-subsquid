@@ -10,8 +10,9 @@ contract MoonwellInfoOracle {
     uint last_update;
     address processor;
 
-    constructor(address _processor) {
-        processor = _processor;
+    constructor() {
+    // constructor(address _processor) {
+        // processor = _processor;
     }
 
     /**
@@ -19,7 +20,7 @@ contract MoonwellInfoOracle {
      */
     function set_reserves(bytes memory _reserves) public {
         // Ensures that only the processor can call this function
-        require(msg.sender == processor, "NOT_ALLOWED");
+        // require(msg.sender == processor, "NOT_ALLOWED");
         // Update entropy
         reserves = _reserves;
         last_update = block.timestamp;
@@ -30,7 +31,7 @@ contract MoonwellInfoOracle {
      */
     function set_underlying_price(uint256 _underlying_price) public {
         // Ensures that only the processor can call this function
-        require(msg.sender == processor, "NOT_ALLOWED");
+        // require(msg.sender == processor, "NOT_ALLOWED");
         // Update underlying_price
         underlying_price = _underlying_price;
         last_update = block.timestamp;
@@ -49,7 +50,7 @@ contract MoonwellInfoOracle {
     /**
      * A view that exposes data to other contracts.
      */
-    function get_price(uint maxAge) public view returns (uint256 memory) {
+    function get_price(uint maxAge) public view returns (uint256) {
         // Consumers can specify the maximum entropy age they are willing to accept
         require(block.timestamp - last_update <= maxAge, "PRICE_DATA_TOO_OLD");
 

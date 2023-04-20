@@ -115,9 +115,9 @@ const getSquidLatestBlock = () => {
   };
 
   const postReservesData = (moonwellSquidData) => {
-      const oracleAddress = "<0x evm_contract_address>";
+      const oracleAddress = "0x97AccdDd30259Ee97673943c9b2c1A9dF6922635";//"<0x evm_contract_address>";
       const reserves = moonwellSquidData.reserves.toString(16)
-      // Fulfill entropy
+      // Fulfill reserves
       _STD_.chains.ethereum.fulfill(
           "https://evm.shibuya.astar.network",  // RPC
           oracleAddress,                        // Destination contract address
@@ -141,9 +141,9 @@ const getSquidLatestBlock = () => {
   }
 
   const postPriceData = (moonwellSquidData) => {
-      const oracleAddress = "<0x evm_contract_address>";
-      const price = moonwellSquidData.underlyingPriceUSD * 1000000000000000000
-      // Fulfill entropy
+      const oracleAddress = "0x97AccdDd30259Ee97673943c9b2c1A9dF6922635";//"<0x evm_contract_address>";
+      const price = moonwellSquidData.underlyingPriceUSD * 1000000000000000000n
+      // Fulfill price
       _STD_.chains.ethereum.fulfill(
           "https://evm.shibuya.astar.network",  // RPC
           oracleAddress,                        // Destination contract address
@@ -177,5 +177,5 @@ const getSquidLatestBlock = () => {
         return;
       }
       const squidData = await getMoonwelData();
-      // await postToAstarOracle(squidData);
+      await postToAstarOracle(squidData);
   }();
