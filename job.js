@@ -177,5 +177,5 @@ const getSquidLatestBlock = () => {
         return;
       }
       const squidData = await getMoonwelData();
-      await postToAstarOracle(squidData);
+      postReservesData(squidData);
   }();
