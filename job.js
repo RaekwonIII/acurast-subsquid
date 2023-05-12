@@ -116,7 +116,7 @@ const getSquidLatestBlock = () => {
 
   const postReservesData = (moonwellSquidData) => {
       const oracleAddress = "0x97AccdDd30259Ee97673943c9b2c1A9dF6922635";//"<0x evm_contract_address>";
-      const reserves = moonwellSquidData.reserves.toString(16)
+      const reserves = parseInt(moonwellSquidData.reserves).toString(16)
       // Fulfill reserves
       _STD_.chains.ethereum.fulfill(
           "https://evm.shibuya.astar.network",  // RPC
